@@ -1,5 +1,5 @@
 {
-    "name": "f1bal/lumen-passport-mongodb",
+    "name": "f1nal/lumen-passport-mongodb",
     "type": "library",
     "description": "Making Laravel Passport work with Lumen and MongoDB. Fork kayrules/lumen-passport-mongodb",
     "keywords": ["php","lumen","laravel passport", "mongodb"],
