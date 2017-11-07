@@ -16,7 +16,7 @@
         "php": ">=5.6.4",
         "illuminate/database": "~5.3|~5.4",
         "illuminate/support": "~5.3|~5.4",
-        "moeen-basra/laravel-passport-mongodb": "^4.0"
+        "moeen-basra/laravel-passport-mongodb": "dev-fixTokenId"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
