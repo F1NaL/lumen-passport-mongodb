@@ -24,7 +24,7 @@ class AccessTokenController extends \MoeenBasra\LaravelPassportMongoDB\Http\Cont
     {
         $response = $this->withErrorHandling(function () use ($request) {
             $input = (array) $request->getParsedBody();
-            $clientId = isset($input['client_id']) ? $input['client_id'] : null;
+            $clientId = isset($input['client_id']) ?? null;
 
             // Overwrite password grant at the last minute to add support for customized TTLs
             $this->server->enableGrantType(
@@ -44,9 +44,7 @@ class AccessTokenController extends \MoeenBasra\LaravelPassportMongoDB\Http\Cont
             $tokenId = $this->jwt->parse($payload['access_token'])->getClaim('jti');
             $token = $this->tokens->find($tokenId);
 
-            if ($token->client->firstParty() && LumenPassport::$allowMultipleTokens) {
-                // We keep previous tokens for password clients
-            } else {
+            if (!($token->client->firstParty() && LumenPassport::$allowMultipleTokens)) {
                 $this->revokeOrDeleteAccessTokens($token, $tokenId);
             }
         }
@@ -90,6 +88,9 @@ class AccessTokenController extends \MoeenBasra\LaravelPassportMongoDB\Http\Cont
             $query->delete();
         } else {
             $query->update(['revoked' => true]);
+        }
+        if($query) {
+
         }
     }
 }
